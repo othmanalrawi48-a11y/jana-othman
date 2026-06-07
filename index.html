@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Little Space</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Stars (night only) -->
+  <div class="stars" id="stars"></div>
+
+  <!-- ── Entry Screen ─────────────────────────────── -->
+  <div class="screen" id="entry-screen">
+    <div class="door-container">
+
+      <!-- Magical door SVG -->
+      <svg class="door-svg" width="160" height="220" viewBox="0 0 160 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Door frame -->
+        <rect x="10" y="10" width="140" height="200" rx="70" fill="#C97B8A" opacity="0.25"/>
+        <!-- Door body -->
+        <rect x="20" y="18" width="120" height="192" rx="60" fill="#FFF0E8"/>
+        <rect x="20" y="18" width="120" height="192" rx="60" stroke="#D4A853" stroke-width="3"/>
+        <!-- Door arch highlight -->
+        <path d="M40 18 Q80 0 120 18" stroke="#D4A853" stroke-width="2" fill="none" opacity="0.5"/>
+        <!-- Panel lines -->
+        <rect x="38" y="40" width="84" height="70" rx="42" fill="none" stroke="#D4A853" stroke-width="1.5" opacity="0.5"/>
+        <rect x="48" y="130" width="64" height="50" rx="8" fill="none" stroke="#D4A853" stroke-width="1.5" opacity="0.5"/>
+        <!-- Keyhole plate -->
+        <ellipse cx="80" cy="118" rx="12" ry="14" fill="#D4A853" opacity="0.9"/>
+        <ellipse cx="80" cy="114" rx="6" ry="6" fill="#FFF0E8"/>
+        <path d="M76 120 L80 134 L84 120 Z" fill="#FFF0E8"/>
+        <!-- Door knob -->
+        <circle cx="106" cy="115" r="6" fill="#D4A853"/>
+        <circle cx="106" cy="115" r="3" fill="#e8c87a"/>
+        <!-- Stars decoration -->
+        <text x="50" y="90" font-size="14" fill="#D4A853" opacity="0.6">✦</text>
+        <text x="92" y="82" font-size="10" fill="#C9B8E8" opacity="0.7">✦</text>
+        <text x="70" y="76" font-size="8"  fill="#F4A7B9" opacity="0.6">✦</text>
+      </svg>
+
+      <p class="entry-title">Enter our space ✦</p>
+
+      <form class="passphrase-form" id="passphrase-form">
+        <input
+          class="passphrase-input"
+          id="passphrase-input"
+          type="password"
+          inputmode="numeric"
+          placeholder="passphrase"
+          autocomplete="off"
+          maxlength="20"
+        />
+        <span class="error-msg" id="error-msg"></span>
+        <button class="unlock-btn" type="submit">Unlock</button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ── Identity Screen ──────────────────────────── -->
+  <div class="screen" id="identity-screen">
+    <div class="identity-card">
+      <p class="identity-title">Who are you? ✦</p>
+      <p class="identity-subtitle">Choose your name to personalise the experience</p>
+      <div class="identity-buttons">
+        <button class="identity-btn othman" data-name="Othman">Othman</button>
+        <button class="identity-btn jana"   data-name="Jana">Jana</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Home Screen ──────────────────────────────── -->
+  <div class="screen" id="home-screen">
+
+    <!-- Tab: Home -->
+    <div class="tab-panel active" id="tab-home">
+      <div class="home-content">
+        <p class="greeting" id="greeting-text">Good morning</p>
+        <p class="basmallah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+
+        <!-- Characters -->
+        <div class="characters-row">
+
+          <div class="character-wrap" id="char-othman">
+            <div class="speech-bubble" id="bubble-othman"></div>
+            <img src="othman.png" alt="Othman" class="character-img float-a" id="img-othman" />
+            <button class="dua-btn" data-from="othman" data-to="jana">🌙 Made dua for you</button>
+          </div>
+
+          <div class="character-wrap" id="char-jana">
+            <div class="speech-bubble" id="bubble-jana"></div>
+            <img src="jana.png" alt="Jana" class="character-img float-b" id="img-jana" />
+            <button class="dua-btn" data-from="jana" data-to="othman">🌙 Made dua for you</button>
+            <p class="sleepy-indicator" id="sleepy-indicator" style="display:none">😴 evening athkar!</p>
+          </div>
+
+        </div>
+
+        <!-- Barakah Meter -->
+        <div class="barakah-wrap">
+          <div class="barakah-track">
+            <div class="barakah-fill" id="barakah-fill" style="width:0%"></div>
+            <div class="barakah-divider"></div>
+          </div>
+          <div class="barakah-labels">
+            <span class="barakah-user-label"  id="barakah-user-label">—</span>
+            <span class="barakah-other-label" id="barakah-other-label">—</span>
+          </div>
+          <p class="barakah-label">Your barakah today</p>
+          <p class="barakah-sync-note">connects fully when both devices sync</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab: Athkar -->
+    <div class="tab-panel" id="tab-athkar">
+      <div class="athkar-inner">
+
+        <div class="athkar-header">
+          <div class="athkar-toggle">
+            <button class="athkar-toggle-btn active" data-session="morning">🌤 Morning</button>
+            <button class="athkar-toggle-btn" data-session="evening">🌙 Evening</button>
+          </div>
+          <div class="athkar-progress-row">
+            <span class="athkar-progress-text" id="athkar-progress-text">0 / 13 complete</span>
+          </div>
+          <div class="progress-bar-track">
+            <div class="progress-bar-fill" id="athkar-progress-fill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="athkar-list" id="athkar-list"></div>
+
+      </div>
+    </div>
+
+    <!-- Tab: Wird -->
+    <div class="tab-panel" id="tab-wird">
+      <div class="wird-inner">
+
+        <p class="wird-page-title">📖 Daily Wird</p>
+
+        <div class="wird-card" id="wird-card">
+          <p class="wird-arabic">وِرْدٌ يَوْمِيٌّ</p>
+          <p class="wird-card-sub">Tap to mark your Quran reading complete for today</p>
+          <textarea
+            class="wird-note-input"
+            id="wird-note-input"
+            placeholder="Which surah or ayahs did you read? e.g. Al-Baqarah 255–286"
+            maxlength="200"
+          ></textarea>
+          <button class="wird-done-btn" id="wird-done-btn">✓ Mark as Done</button>
+        </div>
+
+        <div class="streak-card">
+          <div class="streak-top">
+            <span class="streak-flame">🔥</span>
+            <span class="streak-number" id="streak-display">0</span>
+          </div>
+          <p class="streak-label">day streak</p>
+          <p class="streak-milestone" id="streak-milestone"></p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab: Shared -->
+    <div class="tab-panel" id="tab-shared">
+      <div class="shared-inner">
+
+        <!-- Sub-tabs -->
+        <div class="shared-sub-tabs">
+          <button class="sub-tab active" data-sub="gratitude">🌸 Gratitude</button>
+          <button class="sub-tab" data-sub="dua">🤲 Duas</button>
+          <button class="sub-tab" data-sub="memory">🫙 Memories</button>
+        </div>
+
+        <!-- ── Gratitude Wall ── -->
+        <div class="sub-panel active" id="sub-gratitude">
+          <div class="shared-input-row">
+            <input class="shared-text-input" type="text" id="gratitude-input"
+              placeholder="I'm grateful for…" maxlength="200" />
+            <button class="shared-add-btn" id="gratitude-add-btn">Add</button>
+          </div>
+          <div class="corkboard" id="gratitude-board"></div>
+        </div>
+
+        <!-- ── Dua Board ── -->
+        <div class="sub-panel" id="sub-dua">
+          <div class="dua-form">
+            <input class="shared-text-input" type="text" id="dua-title-input"
+              placeholder="Title — e.g. Health for my family" maxlength="100" />
+            <textarea class="shared-textarea" id="dua-body-input"
+              placeholder="Write your dua here…" maxlength="600"></textarea>
+            <button class="shared-add-btn" id="dua-add-btn">🤲 Add Dua</button>
+          </div>
+          <div class="dua-list" id="dua-active-list"></div>
+          <div class="dua-answered-section" id="dua-answered-section" style="display:none">
+            <p class="answered-heading">✨ Answered by Allah</p>
+            <div class="dua-list" id="dua-answered-list"></div>
+          </div>
+        </div>
+
+        <!-- ── Memory Jar ── -->
+        <div class="sub-panel" id="sub-memory">
+          <div class="shared-input-row">
+            <input class="shared-text-input" type="text" id="memory-input"
+              placeholder="Add a memory or special moment…" maxlength="300" />
+            <button class="shared-add-btn" id="memory-add-btn">Add</button>
+          </div>
+          <div class="jar-container">
+            <div class="jar-wrap">
+              <div class="jar-lid"></div>
+              <div class="jar-neck"></div>
+              <div class="jar-body">
+                <div class="jar-liquid" id="jar-fill"></div>
+                <div class="jar-shine"></div>
+              </div>
+            </div>
+            <p class="jar-count" id="jar-count">0 memories</p>
+          </div>
+          <div class="memory-list" id="memory-list"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab: Settings -->
+    <div class="tab-panel" id="tab-settings">
+      <div class="settings-inner">
+
+        <p class="settings-page-title">⚙️ Settings</p>
+
+        <!-- Identity switcher -->
+        <div class="settings-card">
+          <p class="settings-card-title">Identity</p>
+          <p class="settings-card-sub">Switch who you are right now</p>
+          <div class="settings-id-row">
+            <button class="identity-btn othman settings-id-btn" data-name="Othman">Othman</button>
+            <button class="identity-btn jana   settings-id-btn" data-name="Jana">Jana</button>
+          </div>
+          <p class="settings-current-user" id="settings-current-user"></p>
+        </div>
+
+        <!-- About -->
+        <div class="settings-card">
+          <p class="settings-card-title">Our Space ✦</p>
+          <p class="settings-card-sub">A private little world built for two</p>
+          <p class="settings-card-sub" style="margin-top:0.3rem;color:var(--gold);font-weight:800">27 · 06 · 2026</p>
+        </div>
+
+        <!-- Reset — hidden at bottom -->
+        <div class="settings-reset-area">
+          <button class="reset-btn" id="reset-btn">Reset everything</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <button class="nav-tab active" data-tab="home">
+        <span class="tab-icon">🏡</span>
+        Home
+      </button>
+      <button class="nav-tab" data-tab="athkar">
+        <span class="tab-icon">📿</span>
+        Athkar
+      </button>
+      <button class="nav-tab" data-tab="wird">
+        <span class="tab-icon">📖</span>
+        Wird
+      </button>
+      <button class="nav-tab" data-tab="shared">
+        <span class="tab-icon">💌</span>
+        Shared
+      </button>
+      <button class="nav-tab" data-tab="settings">
+        <span class="tab-icon">⚙️</span>
+        Settings
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Reset confirmation modal -->
+  <div class="modal-overlay" id="reset-modal" style="display:none">
+    <div class="modal-box">
+      <p class="modal-title">Reset everything?</p>
+      <p class="modal-body">This will permanently wipe all your athkar progress, wird streak, duas, gratitude notes, and memories. It cannot be undone.</p>
+      <div class="modal-btns">
+        <button class="modal-cancel-btn" id="reset-cancel">Cancel</button>
+        <button class="modal-confirm-btn" id="reset-confirm">Yes, reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase v11 modular SDK (module, deferred automatically) -->
+  <script type="module" src="firebase.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
