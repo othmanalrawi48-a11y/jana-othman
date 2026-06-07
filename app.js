@@ -957,4 +957,47 @@ function initSettings() {
   });
 }
 
+/* ── Engagement Countdown ── */
+function initEngagementCountdown() {
+  const TARGET = new Date('2026-06-27T00:00:00');
+  const wrap   = document.getElementById('engagement-countdown');
+  const label  = document.getElementById('countdown-label');
+  const units  = document.getElementById('countdown-units');
+  const sub    = document.getElementById('countdown-sublabel');
+  const elDays  = document.getElementById('cd-days');
+  const elHours = document.getElementById('cd-hours');
+  const elMins  = document.getElementById('cd-mins');
+
+  if (!wrap) return;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now  = new Date();
+    const diff = TARGET - now;
+
+    if (diff <= 0) {
+      wrap.classList.add('engaged');
+      label.textContent = '💍 We\'re Engaged! 💍';
+      units.style.display = 'none';
+      sub.textContent = 'Alhamdulillah — our forever starts today 🌸';
+      return;
+    }
+
+    const totalMins  = Math.floor(diff / 60000);
+    const totalHours = Math.floor(totalMins / 60);
+    const days  = Math.floor(totalHours / 24);
+    const hours = totalHours % 24;
+    const mins  = totalMins % 60;
+
+    elDays.textContent  = pad(days);
+    elHours.textContent = pad(hours);
+    elMins.textContent  = pad(mins);
+  }
+
+  tick();
+  setInterval(tick, 30000);
+}
+
 document.addEventListener('DOMContentLoaded', boot);
+document.addEventListener('DOMContentLoaded', initEngagementCountdown);

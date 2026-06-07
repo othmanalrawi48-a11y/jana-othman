@@ -661,6 +661,108 @@ body.time-night .thikr-card .arabic { color: #2a1a0a; }
   cursor: default;
 }
 
+/* ── Engagement Countdown ── */
+.engagement-countdown {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 0.9rem;
+  margin-bottom: 0.1rem;
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(212, 168, 83, 0.25);
+  border-radius: 20px;
+  padding: 0.85rem 1.2rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  box-shadow: 0 4px 18px rgba(212, 168, 83, 0.1);
+}
+
+.countdown-label {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--gold);
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.countdown-units {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+}
+
+.countdown-num {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #5a3e2b;
+  min-width: 2ch;
+  text-align: center;
+}
+
+.countdown-unit-label {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 600;
+  font-size: 0.6rem;
+  color: #a07850;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.countdown-sep {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--blush);
+  line-height: 1;
+  margin-bottom: 0.8rem;
+}
+
+.countdown-sublabel {
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #a07850;
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* Celebration state */
+.engagement-countdown.engaged {
+  background: linear-gradient(135deg, rgba(255, 203, 164, 0.45), rgba(244, 167, 185, 0.45));
+  border-color: rgba(212, 168, 83, 0.5);
+  box-shadow: 0 4px 24px rgba(212, 168, 83, 0.25);
+  animation: engagementGlow 2.5s ease-in-out infinite;
+}
+
+.engagement-countdown.engaged .countdown-label {
+  font-size: 1rem;
+  color: #b5603a;
+}
+
+@keyframes engagementGlow {
+  0%, 100% { box-shadow: 0 4px 24px rgba(212, 168, 83, 0.25); }
+  50%       { box-shadow: 0 4px 32px rgba(212, 168, 83, 0.55), 0 0 0 3px rgba(244, 167, 185, 0.2); }
+}
+
+/* Night mode adjustments */
+.time-night .countdown-num   { color: #e8d5c0; }
+.time-night .countdown-unit-label,
+.time-night .countdown-sublabel { color: #c9a87a; }
+.time-night .engagement-countdown { background: rgba(255,255,255,0.08); border-color: rgba(212,168,83,0.2); }
+
 /* ── Barakah Meter ── */
 .barakah-wrap {
   width: 100%;
